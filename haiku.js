@@ -1,15 +1,27 @@
 var fs = require('fs');
 var formatData = require('./modules/formatData');
-var lengthCalculate = require('./modules/lengthCalculate')
-var createHaiku = require('./modules/createHaiku');
+var createHaikuFree = require('./modules/createHaikuFree');
+var createHaikuStrict = require('./modules/createHaikuStrict');
+
+var dict = fs.readFileSync('./cmudict.txt', 'utf-8');
+var formattedData = formatData(dict);
 
 
-var cmuDict = fs.readFileSync('./cmudict.txt', 'utf-8');
+/*
+haikuFree randomly generates poems 
+with the desired total syllable counts of each line.
 
-var formattedData = formatData(cmuDict);
+haikuStrict is closer to what the assignment intended,
+and will generate the words of a haiku based on the 
+structure array
+*/
+var haikuFree = createHaikuFree([5,7,5], formattedData);
+var haikuStrict = createHaikuStrict([1,4,3,2,2,5], formattedData);
 
-var probability_arr = lengthCalculate(formattedData);
 
-var haiku = createHaiku([5,7,5], probability_arr, formattedData);
 
-console.log(haiku);
+console.log("haikuFree: \n" + haikuFree + "\n");
+console.log("haikuStrict: \n" + haikuStrict + "\n");
+
+
+

@@ -1,5 +1,5 @@
 function formatData(string) {
-	function syllableCount(string) {
+	function syllableCount(string) { // parses through the phonemes and increments if there is a number
 		var strArr = string.split(" "),
 				totalSyllables = 0;
 		strArr.forEach(function(elem) {
@@ -11,17 +11,19 @@ function formatData(string) {
 	}
 
 	function cleanWord(string) {
-		return string.replace(/\(\d\)/, "").toLowerCase();
+		return string.replace(/\(\d\)/, "").toLowerCase(); // removes the '(n)' that some words have, and changes it to lowercase
 	}
 
-	function syllableObjectMaker(linesArr) {
+	function syllableObjectMaker(linesArr) { // categorizes all the words by syllable count. e.g. obj['4'] would return an array of all the words with 4 syllables.
 		return linesArr.reduce(function(a, line) {
 			var lineSplit = line.split("  ");
-			var syllables = syllableCount(lineSplit[1]);
 			var clean_word = cleanWord(lineSplit[0]);
-			var word_obj = { word: clean_word, syllables: syllables};
+			var syllables = syllableCount(lineSplit[1]);			
+			var word_obj = { word: clean_word, syllables: syllables}; 
+			// each element of the arrays is its own obj with two properties. 
+			// Not useful in this project, but may be useful in future to expand on functionality.
 			
-			if (a[syllables]) {
+			if (a[syllables]) { 
 				a[syllables].push(word_obj);
 			} else {
 				a[syllables] = [word_obj];
@@ -31,11 +33,8 @@ function formatData(string) {
 	}
 
 	var linesArr = string.split("\n");
-	// console.log(linesArr.length);
 
-	var syllable_obj = syllableObjectMaker(linesArr);
-
-	return syllable_obj;
+	return syllableObjectMaker(linesArr);
 }
 
 module.exports = formatData;
