@@ -1,7 +1,7 @@
 var fs = require('fs');
-var formatData = require('./formatData');
-var lengthCalculate = require('./lengthCalculate')
-var createHaiku = require('./createHaiku');
+var formatData = require('./modules/formatData');
+var lengthCalculate = require('./modules/lengthCalculate')
+var createHaiku = require('./modules/createHaiku');
 
 
 var cmuDict = fs.readFileSync('./cmudict.txt', 'utf-8');

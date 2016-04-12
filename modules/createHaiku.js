@@ -11,7 +11,11 @@ function createHaiku(structure_arr, probability_arr, formattedData) { // format 
 		}
 	}
 
-	function createLine(numSyll) {
+	function capitalize(string) {
+		return string[0].toUpperCase() + string.slice(1);
+	}
+
+	function createLine(numSyll, current_line) {
 		var currentSyll = 0;
 		var line = "";
 
@@ -19,12 +23,13 @@ function createHaiku(structure_arr, probability_arr, formattedData) { // format 
 			var syllables_left = numSyll - currentSyll;
 			var random = getRandomNumber(probability_arr[syllables_left]);
 			var syllable_key = syllableToUse(random);	
-			// console.log(random);
-			// console.log(probability_arr);
-			// console.log(syllable_key);
 
 			var chosen_word_index = getRandomNumber(formattedData[syllable_key].length);
 			var chosen_word = formattedData[syllable_key][chosen_word_index].word;
+			
+			if (current_line === 1 && currentSyll === 0) {
+				chosen_word = capitalize(chosen_word);
+			} 
 			
 			line += chosen_word + " ";
 
@@ -33,11 +38,18 @@ function createHaiku(structure_arr, probability_arr, formattedData) { // format 
 		return line.slice(0, -1);
 	}
 
+
 	var haiku = '';
 
-	structure_arr.forEach(function(syllables) {
-		haiku += createLine(syllables);
-		haiku += "\n";
+	structure_arr.forEach(function(syllables, index) {
+		var lines = structure_arr.length,
+				current_line = index + 1;
+		haiku += createLine(syllables, current_line);
+		if (current_line < lines) {
+			haiku += ",\n";
+		} else {
+			haiku += ".";
+		}
 	});
 
 	return haiku;
