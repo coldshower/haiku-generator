@@ -19,7 +19,6 @@ var haikuFree = createHaikuFree([5,7,5], formattedData);
 var haikuStrict = createHaikuStrict([1,4,3,2,2,5], formattedData);
 
 
-
 console.log("haikuFree: \n" + haikuFree + "\n");
 console.log("haikuStrict: \n" + haikuStrict + "\n");
 
