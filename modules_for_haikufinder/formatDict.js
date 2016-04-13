@@ -17,10 +17,10 @@ function formatDict(string) {
 	function makeDictionary(linesArr) { // categorizes all the words by syllable count. e.g. obj['4'] would return an array of all the words with 4 syllables.
 		return linesArr.reduce(function(a, line) {
 			var lineSplit = line.split("  ");
-			var clean_word = cleanWord(lineSplit[0]);
+			var word = cleanWord(lineSplit[0]);
 			var syllables = syllableCount(lineSplit[1]);			
 			
-			a[clean_word] = syllables;
+			a[word] = syllables;
 			return a;
 		}, {});
 	}

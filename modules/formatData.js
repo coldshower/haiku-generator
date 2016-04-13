@@ -17,16 +17,16 @@ function formatData(string) {
 	function syllableObjectMaker(linesArr) { // categorizes all the words by syllable count. e.g. obj['4'] would return an array of all the words with 4 syllables.
 		return linesArr.reduce(function(a, line) {
 			var lineSplit = line.split("  ");
-			var clean_word = cleanWord(lineSplit[0]);
+			var word = cleanWord(lineSplit[0]);
 			var syllables = syllableCount(lineSplit[1]);			
-			var word_obj = { word: clean_word, syllables: syllables}; 
+			var wordObj = { word: word, syllables: syllables}; 
 			// each element of the arrays is its own obj with two properties. 
 			// Not useful in this project, but may be useful in future to expand on functionality.
 			
 			if (a[syllables]) { 
-				a[syllables].push(word_obj);
+				a[syllables].push(wordObj);
 			} else {
-				a[syllables] = [word_obj];
+				a[syllables] = [wordObj];
 			}
 			return a;
 		}, {});
